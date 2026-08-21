@@ -54,11 +54,39 @@
       <div class="overlay-box">
         <p id="overlay-title">GAME OVER</p>
         <p id="overlay-score"></p>
+        <div id="gameover-panel" class="hidden">
+          <div id="gameover-save" class="hidden">
+            <label for="gameover-name-input">Nuevo récord. Nombre:</label>
+            <input type="text" id="gameover-name-input" maxlength="10" value="AAA" autocomplete="off" />
+            <button id="gameover-save-btn">Guardar</button>
+          </div>
+          <div class="records-list">
+            <span class="label">RÉCORDS</span>
+            <ol id="gameover-records-list"></ol>
+          </div>
+        </div>
         <button id="restart-btn">Reiniciar</button>
+      </div>
+    </div>
+
+    <div id="start-screen" class="overlay">
+      <div class="overlay-box">
+        <p id="start-title">TETRIS</p>
+        <div class="records-list">
+          <span class="label">RÉCORDS</span>
+          <ol id="start-records-list"></ol>
+        </div>
+        <div class="start-stats">
+          <span id="start-best-combo"></span>
+          <span id="start-max-lines"></span>
+        </div>
+        <button id="play-btn">Jugar</button>
+        <button id="reset-records-btn">Reiniciar récords</button>
       </div>
     </div>
   </div>
 
+  <script src="records.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
