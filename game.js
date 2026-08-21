@@ -4,18 +4,6 @@ const COLS = 10;
 const ROWS = 20;
 const BLOCK = 30;
 
-const COLORS = [
-  null,
-  '#4dd0e1', // I - cyan
-  '#ffd54f', // O - yellow
-  '#ba68c8', // T - purple
-  '#81c784', // S - green
-  '#e57373', // Z - red
-  '#90caf9', // J - pale blue
-  '#ffb74d', // L - orange
-  '#bdbdbd', // Tuerca - gris metálico
-];
-
 const NUT = 8;
 
 const PIECES = [
@@ -44,8 +32,10 @@ const overlayTitle = document.getElementById('overlay-title');
 const overlayScore = document.getElementById('overlay-score');
 const restartBtn = document.getElementById('restart-btn');
 const themeToggle = document.getElementById('theme-toggle');
+const skinSelect = document.getElementById('skin-select');
 
 let board, holes, current, next, score, lines, level, paused, gameOver, lastTime, dropAccum, dropInterval, animId;
+let activeSkin = SKINS.retro;
 
 function applyTheme(light) {
   document.body.classList.toggle('light', light);
@@ -65,6 +55,35 @@ function loadTheme() {
     saved = null;
   }
   applyTheme(saved === 'light');
+}
+
+function applySkin(skinKey) {
+  const key = Object.prototype.hasOwnProperty.call(SKINS, skinKey) ? skinKey : 'retro';
+  activeSkin = SKINS[key];
+  Object.keys(SKINS).forEach(k => document.body.classList.remove('skin-' + k));
+  if (key !== 'retro') {
+    document.body.classList.add('skin-' + key);
+  }
+  if (skinSelect) skinSelect.value = key;
+  try {
+    localStorage.setItem('tetris-skin', key);
+  } catch (e) {
+    // localStorage no disponible: no persistimos, se mantiene el skin actual
+  }
+  // re-render inmediato, sin recargar la página; board/next aún no existen
+  // en la carga inicial (antes de init()), así que lo hacemos condicional
+  if (board) draw();
+  if (next) drawNext();
+}
+
+function loadSkin() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem('tetris-skin');
+  } catch (e) {
+    saved = null;
+  }
+  applySkin(saved);
 }
 
 function createBoard() {
@@ -187,15 +206,7 @@ function updateHUD() {
 }
 
 function drawBlock(context, x, y, colorIndex, size, alpha) {
-  if (!colorIndex) return;
-  const color = COLORS[colorIndex];
-  context.globalAlpha = alpha ?? 1;
-  context.fillStyle = color;
-  context.fillRect(x * size + 1, y * size + 1, size - 2, size - 2);
-  // highlight
-  context.fillStyle = 'rgba(255,255,255,0.12)';
-  context.fillRect(x * size + 1, y * size + 1, size - 2, 4);
-  context.globalAlpha = 1;
+  activeSkin.drawBlock(context, x, y, colorIndex, size, alpha);
 }
 
 function drawNutHole(context, x, y, size, alpha) {
@@ -356,5 +367,8 @@ restartBtn.addEventListener('click', init);
 
 themeToggle.addEventListener('change', () => applyTheme(themeToggle.checked));
 
+if (skinSelect) skinSelect.addEventListener('change', () => applySkin(skinSelect.value));
+
 loadTheme();
+loadSkin();
 init();

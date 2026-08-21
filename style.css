@@ -54,6 +54,142 @@ body.light {
   --toggle-thumb-bg: #3b5bdb;
 }
 
+/* ---- Skins visuales ----
+   Cada skin fija sus colores de acento (título, valores, botones) y una
+   superficie por defecto (modo oscuro). Las reglas `body.light.skin-*`
+   tienen mayor especificidad (dos clases) que `body.light` y `body.skin-*`
+   por separado, así que el toggle claro/oscuro sigue teniendo efecto real
+   -cambia la superficie- incluso con un skin activo, sin perder el acento
+   propio del skin. */
+body.skin-neon {
+  --bg: #05010a;
+  --fg: #e6e6ff;
+  --title-color: #ff2fd0;
+  --title-glow: rgba(255, 47, 208, 0.8);
+  --board-bg: #0a0014;
+  --board-shadow: 0 0 40px rgba(255, 47, 208, 0.35);
+  --border-color: #3a0a5a;
+  --grid-line: #1a0530;
+  --label-color: #7a5aa0;
+  --value-color: #00e5ff;
+  --controls-color: #a08ac0;
+  --kbd-bg: #1a0530;
+  --kbd-border: #5a1a8a;
+  --kbd-color: #d0b0ff;
+  --overlay-bg: rgba(5, 1, 10, 0.85);
+  --overlay-title-color: #ff2fd0;
+  --overlay-score-color: #00e5ff;
+  --btn-bg: #ff2fd0;
+  --btn-color: #05010a;
+  --btn-hover: #ff6fe0;
+  --toggle-track-bg: #1a0530;
+  --toggle-thumb-bg: #ff2fd0;
+}
+
+body.light.skin-neon {
+  --bg: #fff0fb;
+  --fg: #3a0a5a;
+  --board-bg: #fff6fd;
+  --board-shadow: 0 0 24px rgba(255, 47, 208, 0.2);
+  --border-color: #f0b8e0;
+  --grid-line: #fbe0f4;
+  --label-color: #b06aa0;
+  --controls-color: #8a5a80;
+  --kbd-bg: #fbe0f4;
+  --kbd-border: #f0b8e0;
+  --kbd-color: #7a3a6a;
+  --overlay-bg: rgba(255, 240, 251, 0.85);
+  --toggle-track-bg: #f0b8e0;
+}
+
+body.skin-pastel {
+  --bg: #2b2230;
+  --fg: #f0d8e4;
+  --title-color: #f7a8c4;
+  --title-glow: rgba(247, 168, 196, 0.5);
+  --board-bg: #352a3c;
+  --board-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+  --border-color: #4a3a52;
+  --grid-line: #3a2e42;
+  --label-color: #a88ca0;
+  --value-color: #f7a8c4;
+  --controls-color: #b09aac;
+  --kbd-bg: #3a2e42;
+  --kbd-border: #4a3a52;
+  --kbd-color: #e0c0d0;
+  --overlay-bg: rgba(43, 34, 48, 0.85);
+  --overlay-title-color: #f4998f;
+  --overlay-score-color: #f7a8c4;
+  --btn-bg: #f7a8c4;
+  --btn-color: #2b2230;
+  --btn-hover: #f9bdd3;
+  --toggle-track-bg: #4a3a52;
+  --toggle-thumb-bg: #f7a8c4;
+}
+
+body.light.skin-pastel {
+  --bg: #fdf6f0;
+  --fg: #5a4a5a;
+  --board-bg: #fffaf5;
+  --board-shadow: 0 0 24px rgba(0, 0, 0, 0.06);
+  --border-color: #f0d8e0;
+  --grid-line: #f5e8ee;
+  --label-color: #c0a0b0;
+  --controls-color: #a08a95;
+  --kbd-bg: #f5e8ee;
+  --kbd-border: #eccbd8;
+  --kbd-color: #8a6a78;
+  --overlay-bg: rgba(255, 250, 245, 0.85);
+  --btn-color: #ffffff;
+  --toggle-track-bg: #f0d8e0;
+}
+
+body.skin-pixel {
+  --bg: #101018;
+  --fg: #d0d0d0;
+  --title-color: #58d858;
+  --title-glow: rgba(88, 216, 88, 0.5);
+  --board-bg: #181820;
+  --board-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  --border-color: #383848;
+  --grid-line: #202028;
+  --label-color: #585868;
+  --value-color: #58d858;
+  --controls-color: #888898;
+  --kbd-bg: #202028;
+  --kbd-border: #383848;
+  --kbd-color: #a8a8b8;
+  --overlay-bg: rgba(16, 16, 24, 0.85);
+  --overlay-title-color: #e05858;
+  --overlay-score-color: #58d858;
+  --btn-bg: #58d858;
+  --btn-color: #101018;
+  --btn-hover: #78e878;
+  --toggle-track-bg: #202028;
+  --toggle-thumb-bg: #58d858;
+}
+
+body.light.skin-pixel {
+  --bg: #eef3ee;
+  --fg: #1c261c;
+  --board-bg: #f6faf6;
+  --border-color: #c8d8c8;
+  --grid-line: #dce8dc;
+  --label-color: #6a8a6a;
+  --controls-color: #5a7a5a;
+  --kbd-bg: #dce8dc;
+  --kbd-border: #c8d8c8;
+  --kbd-color: #2c3c2c;
+  --overlay-bg: rgba(238, 243, 238, 0.85);
+  --btn-color: #ffffff;
+  --toggle-track-bg: #c8d8c8;
+}
+
+body.skin-pixel #board,
+body.skin-pixel #next-canvas {
+  border-radius: 0;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -169,6 +305,17 @@ body {
   font-weight: 700;
   color: var(--value-color);
   letter-spacing: 1px;
+}
+
+.skin-select {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--kbd-color);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 #next-canvas {
